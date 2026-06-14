@@ -62,5 +62,8 @@ namespace TicTacToe.Api.Controllers
 
         [HttpPost("{id}/reset")]
         public GameResponse Reset(Guid id) => ToResponse(service.Reset(id));
+
+        [HttpPost("{id}/skip")]
+        public GameResponse Skip(Guid id) => ToResponse(service.Skip(id));
     }
 }

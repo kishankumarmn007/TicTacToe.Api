@@ -100,6 +100,24 @@ namespace TicTacToe.Api.Service
             return g;
         }
 
+        public Game Skip(Guid id)
+        {
+            var g = games[id];
+
+            if (g.Status != GameStatus.InProgress)
+                throw new Exception("Game completed");
+
+            g.CurrentPlayer = g.CurrentPlayer == Player.X ? Player.O : Player.X;
+
+            if (g.Mode == GameMode.Computer && g.CurrentPlayer == Player.O)
+            {
+                var aiMove = GetComputerMove(g);
+                Move(id, aiMove.Item1, aiMove.Item2);
+            }
+
+            return g;
+        }
+
         public Scoreboard GetScore() => score;
 
         public void ResetScore()
